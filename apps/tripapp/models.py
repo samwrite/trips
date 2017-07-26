@@ -2,8 +2,6 @@
 from __future__ import unicode_literals
 from ..loginapp .models import User
 from django.db import models
-import datetime
-from dateutil.parser import parse as parse_date
 
 # Create your models here.
 class TripManager(models.Manager):
