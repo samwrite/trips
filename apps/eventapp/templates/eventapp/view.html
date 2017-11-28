@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+    <body>
+        <a href="{% url 'eventapp:index' %}">Home</a>
+        <a href="{% url 'eventapp:logout' %}">Logout</a><br>
+        <h1>{{event.destination}}</h1>
+        <p>Planned By: {{event.created.name}}</p>
+        <p>Description: {{event.description}}</p>
+        <p>Travel Date From: {{event.travel_from}}</p>
+        <p>Travel Date To: {{event.travel_to}}</p>
+
+        <!-- <h2>Other users joining the event:</h2>
+        {%for user in goers%}
+            <p>{{user.name}}</p>
+        {%endfor%} -->
+
+        {% if personalgoal.count == 0 %}
+        <h2>Add a Goal</h2>
+        <form action = "{% url 'eventapp:addgoal' event.id%}", method = "POST">
+            {% csrf_token %}
+        Goal: <input type="text" name="goal"><br>
+        <input type="submit" name= value="Submit">
+        </form>
+        {% else %}
+        <h3>Goal: {{personalgoal.first.goal}}</h3>
+        {% endif %}
+
+        <h2>Activities</h2>
+        <table border="1">
+            <tr>
+                <th>Note</th>
+                <th>Distance</th>
+            </tr>
+            {%for activity in activities%}
+            <tr>
+                <td>{{activity.note}}</td>
+                <td>{{activity.distance}}</td>
+            </tr>
+            {%endfor%}
+        </table>
+
+        <h2>Add a activity</h2>
+        <form action = "{% url 'eventapp:addactivity' event.id%}", method = "POST">
+            {% csrf_token %}
+        Note: <input type="text" name="note"><br>
+        Distance: <input type="text" name="distance"><br>
+        <input type="submit" name= value="Submit">
+        </form>
+        {%for message in messages%}
+            <p>{{message}}</p>
+        {%endfor%}
+    </body>
+</html>

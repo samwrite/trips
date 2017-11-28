@@ -16,7 +16,7 @@ def register(request):
 def login(request):
     result = User.objects.login(request.POST, request.session)
     if result == True:
-        return redirect("tripapp:index")
+        return redirect("eventapp:index")
     else:
         messages.error(request,"Error, login failed, try again")
         return redirect(reverse("loginapp:index"))

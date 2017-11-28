@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    Hello, {{user.name}}
+    <a href="{% url 'eventapp:logout' %}">Logout</a><br>
+    <br>
+    <h2>Your Events</h2>
+    <table border="1">
+        <tr>
+            <th>Event</th>
+            <th>Event Start Date</th> 
+            <th>Event End Date</th>
+            <th>Plan</th>
+        </tr>
+        {%for event in events%}
+        <tr>
+            <td><a href="{% url 'eventapp:view' event.id%}">{{event.destination}}</a></td>
+            <td>{{event.travel_from}}</td> 
+            <td>{{event.travel_to}}</td>
+            <td>{{event.description}}</td>
+        </tr>
+        {%endfor%}
+    </table>
+    <br>
+    <h2>Other User's Events</h2>
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Event</th>
+            <th>Travel Start Date</th> 
+            <th>Travel End Date</th>
+            <th>Do You Want To Join?</th>
+        </tr>
+        {%for event in other%}
+        <tr>
+            <td>{{event.created.name}}</td>
+            <td><a href="{% url 'eventapp:view' event.id%}">{{event.destination}}</a></td>
+            <td>{{event.travel_from}}</td> 
+            <td>{{event.travel_to}}</td>
+            <td><a href="{% url 'eventapp:join' event.id%}">Join</a></td>
+        </tr>
+        {%endfor%}
+    </table>
+    <br>
+    <a href="{% url 'eventapp:add' %}">Add event</a>
+</body>
+</html>

@@ -7,15 +7,15 @@
     <title>Document</title>
 </head>
 <body>
-    <a href="{% url 'tripapp:index' %}">Home</a>
-    <a href="{% url 'tripapp:logout' %}">Logout</a><br>
-    <h1>Add a Trip</h1>
-    <form action = "{% url 'tripapp:addTrip' %}", method = "POST">
+    <a href="{% url 'eventapp:index' %}">Home</a>
+    <a href="{% url 'eventapp:logout' %}">Logout</a><br>
+    <h1>Add a event</h1>
+    <form action = "{% url 'eventapp:addevent' %}", method = "POST">
         {% csrf_token %}
-    Destination: <input type="text" name="destination"><br>
+    Event name: <input type="text" name="destination"><br>
     Description: <input type="text" name="description"><br>
-    Travel Date From: <input type="date" name="travel_from"><br>
-    Travel Date To: <input type="date" name="travel_to"><br>
+    From: <input type="date" name="travel_from"><br>
+    To: <input type="date" name="travel_to"><br>
     <input type="submit" name= value="Submit">
     </form>
     {%for message in messages%}
